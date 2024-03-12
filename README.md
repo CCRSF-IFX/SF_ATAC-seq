@@ -1,4 +1,4 @@
-#Sequencing facility ATAC-Seq pipeline (SF_ATAC-seq)
+# Sequencing facility ATAC-Seq pipeline (SF_ATAC-seq)
 
 The ATAC-seq (Assay for Transposase-Accessible Chromatin using sequencing) pipeline typically follows several steps to analyze paired-end sequencing data and identify regions of open chromatin (peaks). Here's a basic outline of the process:
 
