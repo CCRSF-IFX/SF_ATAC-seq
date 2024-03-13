@@ -1,0 +1,13 @@
+unaligned: "RAWDATA"
+analysis:  "ANALYSIS"
+paired: 2
+reference: "referecne"
+adapters: "resource/TruSeq_and_nextera_adapters.fa"
+subsamp: "50000"
+fastqscreen: "config file for fastqsceen"
+kraken2db: "kraken database"
+ref : "bowtie2 reference index"
+blacklist: "blacklist regions"
+sizes: "chromosome size"
+deeptools_bed: "bedfile for deeptools"
+
