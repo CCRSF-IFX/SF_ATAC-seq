@@ -1,0 +1,4 @@
+WorkflowError in line 11 of /mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/ini.smk:
+Schema file /mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/../schemas/config.schema.yaml not found.
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/Snakefile", line 9, in <module>
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/ini.smk", line 11, in <module>

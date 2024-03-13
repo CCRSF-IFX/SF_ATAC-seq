@@ -1,0 +1,4 @@
+WorkflowError in line 10 of /mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/ini.smk:
+Config file config/config.yaml not found.
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/Snakefile", line 9, in <module>
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/ini.smk", line 10, in <module>

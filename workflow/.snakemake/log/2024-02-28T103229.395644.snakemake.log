@@ -1,0 +1,3 @@
+SyntaxError in line 8 of /mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/qc.smk:
+invalid syntax
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/Snakefile", line 10, in <module>

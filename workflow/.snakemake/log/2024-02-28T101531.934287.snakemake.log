@@ -1,0 +1,4 @@
+KeyError in line 1 of /mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/qc.smk:
+'RAWDATA'
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/Snakefile", line 10, in <module>
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/qc.smk", line 1, in <module>

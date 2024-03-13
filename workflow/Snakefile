@@ -1,0 +1,35 @@
+# The main entry point of your workflow.
+# After configuring, running snakemake -n in a clone of this repository should successfully execute a dry-run of the workflow.
+
+#report: "report/workflow.rst"
+
+# Allow users to fix the underlying OS via singularity.
+#singularity: "docker://continuumio/miniconda3"
+
+include: "rules/ini.smk"
+include: "rules/qc.smk"
+include: "rules/align.smk"
+include: "rules/peak.smk"
+
+rule all:
+    input:
+        expand("Sample_{sample}/{sample}_R1_001_fastqc.html", sample = samples),
+        expand("Sample_{sample}/{sample}_trimmed_R1.fastq", sample = samples), 
+        expand("Sample_{sample}/{sample}_trimmed_R1_fastqc.html", sample = samples),
+        expand("Sample_{sample}/{sample}_trimmed_R1.sub_screen.png", sample = samples),
+        expand("Sample_{sample}/{sample}_trimmed_R1.sub.fastq", sample = samples),
+        expand("Sample_{sample}/{sample}.kraken2.report.txt", sample = samples),
+        expand("Sample_{sample}/{sample}.sorted.bam", sample = samples),
+        expand("Sample_{sample}/{sample}.sorted.markdup.bam", sample = samples),
+        expand("Sample_{sample}/{sample}.sorted.bam.bai", sample =  samples),
+        expand("Sample_{sample}/{sample}.sortedByRead.bam", sample = samples),
+        expand("Genrich/{sample}.genrich.RPM.bedgraph", sample = samples),
+        expand("Genrich/{sample}.genrich.RPM.bw", sample = samples),
+        "Deeptools/plotFingerQualityMetrics.png", 
+        "Deeptools/bigwig_summary.npz",
+        "Deeptools/PCA.png",
+        "Deeptools/Spearman_Correlation_of_Samples_Heatmap.png",
+        expand("Sample_{sample}/{sample}.sorted.markdup.filtered.bam", sample = samples),
+        "Deeptools/outRawFragmentLengths.txt",
+        expand("Genrich/{sample}.frip.score.txt", sample = samples),
+        "multiqc.html"

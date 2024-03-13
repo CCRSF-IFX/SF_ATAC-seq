@@ -1,0 +1,15 @@
+name: R
+channels:
+ - conda-forge
+ - bioconda
+ - defaults
+dependencies:
+ - r-base=4.3
+ - bioconductor-chipseeker
+ - bioconductor-clusterprofiler
+ - bioconductor-reactomepa
+ - r-ggplot2
+ - bioconductor-org.mm.eg.db
+ - bioconductor-org.Hs.eg.db
+ - bioconductor-txdb.mmusculus.ucsc.mm10.knowngene
+ - bioconductor-txdb.hsapiens.ucsc.hg38.knowngene

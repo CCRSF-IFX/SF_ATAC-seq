@@ -1,0 +1,8 @@
+name: genrich
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - genrich=0.6.1
+  - ucsc-bigwigtowig
+  - ucsc-bedgraphtobigwig

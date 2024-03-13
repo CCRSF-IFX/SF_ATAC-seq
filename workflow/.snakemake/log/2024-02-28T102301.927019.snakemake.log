@@ -1,0 +1,4 @@
+NameError in line 7 of /mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/qc.smk:
+name 'raw' is not defined
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/Snakefile", line 9, in <module>
+  File "/mnt/ccrsf-static/Analysis/choudharis2/ATAC_Validation_CS036084_9ATAC_01082024/workflow/rules/qc.smk", line 7, in <module>
