@@ -40,18 +40,22 @@ Clone the Repository: Clone the new repository to your local machine, choosing t
 Tailor the workflow to your project's requirements:
 
 Edit `config.yaml` in the `config/` directory to set up the workflow execution parameters.
+## Step 3: Load the snakemake version 8 or above
 
-## Step 3: reate a conda environmet
+`module load snakemake/8.4.8`
+
+## Step 4: Create a conda environmet
 
 `conda create -n $NAME`
 
-## Step 4: Execute the Workflow
+## Step 5: Execute the Workflow
 
 Activate the Conda Environment:
 
 `conda activate $NAME`
 
 Install `mamba`
+
 `conda install -c conda-forge mamba`
 
 Test the Configuration: Perform a dry-run to validate your setup:
