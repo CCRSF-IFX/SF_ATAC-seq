@@ -29,4 +29,45 @@ Peak Calling: [Genrich](https://github.com/jsh58/Genrich) identifies regions of 
 
 [MultiQC](https://multiqc.info/) : generates an interactive HTML report that provides a concise summary of the results
 
+# Usage
+
+## Step 1: Obtain a Copy of the Workflow
+
+Clone the Repository: Clone the new repository to your local machine, choosing the directory where you want to perform data analysis. Instructions for cloning can be found [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
+
+## Step 2: Configure the Workflow
+
+Tailor the workflow to your project's requirements:
+
+Edit `config.yaml` in the `config/` directory to set up the workflow execution parameters.
+
+## Step 3: reate a conda environmet
+
+`conda create -n $NAME`
+
+## Step 4: Execute the Workflow
+
+Activate the Conda Environment:
+
+`conda activate $NAME`
+
+Install `mamba`
+`conda install -c conda-forge mamba`
+
+Test the Configuration: Perform a dry-run to validate your setup:
+
+`snakemake --use-conda -np`
+
+Local Execution: Execute the workflow on your local machine using $N cores:
+
+`snakemake --use-conda --cores $N`
+
+Here, $N represents the number of cores you wish to allocate for the workflow.
+
+### Cluster Execution: For cluster environments, submit the workflow as follows:
+
+`snakemake --use-conda --cluster slurm --jobs 100`
+
+Replace 100 with the number of jobs you intend to submit simultaneously. Ensure your cluster environment is correctly configured to handle Snakemake jobs.
+
 
