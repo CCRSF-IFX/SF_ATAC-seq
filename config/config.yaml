@@ -11,3 +11,16 @@ blacklist: "blacklist regions"
 sizes: "chromosome size"
 deeptools_bed: "bedfile for deeptools"
 
+#Cluster assign
+large:
+  mem: 400000
+  time: "96:00:00"
+  partition: "norm"
+medium:
+  mem: 128000
+  time: "96:00:00"
+  partition: "norm"
+small:
+  mem: 32000
+  time: "96:00:00"
+  partition: "norm"
