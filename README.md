@@ -35,20 +35,21 @@ Peak Calling: [Genrich](https://github.com/jsh58/Genrich) identifies regions of 
 
 Clone the Repository: Clone the new repository to your local machine, choosing the directory where you want to perform data analysis. Instructions for cloning can be found [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
-## Step 2: Configure the Workflow
+### Step 2: Configure the Workflow
 
 Tailor the workflow to your project's requirements:
 
 Edit `config.yaml` in the `config/` directory to set up the workflow execution parameters.
-## Step 3: Load the snakemake version 8 or above
+
+### Step 3: Load the snakemake version 8 or above
 
 `module load snakemake/8.4.8`
 
-## Step 4: Create a conda environmet
+### Step 4: Create a conda environmet
 
 `conda create -n $NAME`
 
-## Step 5: Execute the Workflow
+### Step 5: Execute the Workflow
 
 Activate the Conda Environment:
 
