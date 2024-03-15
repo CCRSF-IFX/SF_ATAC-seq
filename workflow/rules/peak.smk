@@ -2,11 +2,12 @@ localrules:remove_chrUn, modPeak
 
 rule genrich:
     input: "Sample_{sample}/{sample}.sortedByRead.bam"
-    output: genrich = "Genrich/{sample}.narrowPeak.tmp" 
+    output: genrich = "Genrich/{sample}.narrowPeak.tmp", bedgraph = "Genrich/{sample}.bedgraph", bed = "Genrich/{sample}.bed" 
     params: blacklist = config['blacklist'], prefix = "Genrich/{sample}"
     conda: "envs/genrich.yaml"
     threads: 16
     log: "logs/{sample}.genrich.log"
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     shell: """
         Genrich -t {input} -o {output.genrich} -j -y -r -v -d 150 -m 5 -e chrM,chrY -E {params.blacklist} -f {params.prefix}.bdg -b {params.prefix}.bed
         cut -f 1,2,3,4 {params.prefix}.bdg | grep -v 'chrUn' | grep -v 'NW' | tail -n +2 > {params.prefix}.bedgraph
@@ -38,6 +39,8 @@ rule NormBdg:
     input: bedgraph = "Genrich/{sample}.bedgraph", bed = "Genrich/{sample}.bed"
     output: normBdg = "Genrich/{sample}.genrich.RPM.bedgraph"
     params: rname = "pl:NormBdg", prefix = "Genrich/{sample}"
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
+    threads: 8
     run:
         normFactor = file_len(input.bed)/1e6
         f2 = open(output.normBdg,"w")
@@ -56,6 +59,7 @@ rule Bdg2Bw:
     params: sizes = config["sizes"],  prefix = "Genrich/{sample}"
     conda: "envs/genrich.yaml"
     threads: 16
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     log: "logs/{sample}.Bdg2Bw.log"
     shell: """
             sort -k1,1 -k2,2n -T ./ --parallel={threads} {input.bedgraph} > {params.prefix}.tmp.bedgraph
@@ -71,10 +75,11 @@ def plotFingerprintInput():
 
 rule plotFingerprint:
     input: lambda wildcards: expand("Sample_{sample}/{sample}.sorted.markdup.bam", sample=samples), lambda wildcards: expand("Genrich/{sample}.genrich.RPM.bw", sample=samples)
-    output: png = "Deeptools/plotFingerQualityMetrics.png"
+    output: png = "Deeptools/plotFingerQualityMetrics.png", tab = "Deeptools/plotFingerQualityMetrics.tab"
     params: bam = plotFingerprintInput()[0], labels = plotFingerprintInput()[1], prefix = "Deeptools/plotFingerQualityMetrics"
     conda: "envs/deeptools.yaml"
     threads: 16
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     log: "logs/plotFingerprint.log"
     shell: """plotFingerprint --numberOfProcessors {threads} -b {params.bam} --labels {params.labels} --minMappingQuality 5 --skipZeros --ignoreDuplicates --outQualityMetrics plotFingerprint_QC_metrics.txt -T "Fingerprints of ATAC-seq samples" --plotFile {output.png} --outQualityMetrics {params.prefix}.tab --outRawCounts Deeptools/RawCounts.tab"""
 
@@ -85,6 +90,7 @@ rule bigwig_summary:
     conda: "envs/deeptools.yaml"
     log: "logs/bigwig_summary.log"
     threads: 8
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     shell: "multiBigwigSummary BED-file -p 8 -b {params.bigwig} --labels {params.labels} -o {output.bw} --BED {params.bed}"
 
 rule plotCorrelation:
@@ -94,6 +100,7 @@ rule plotCorrelation:
     conda: "envs/deeptools.yaml"
     log: "logs/plotCorrelation.log"
     threads: 8
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     shell: """
         plotCorrelation -in {input.bw} --corMethod spearman --skipZeros --whatToPlot heatmap -T "Spearman Correlation of ATAC-seq samples" -o {output.spearman} --outFileCorMatrix Deeptools/SpearmanCor_bigwigScores.tab
         plotCorrelation -in {input.bw} --corMethod pearson --skipZeros --whatToPlot heatmap -T "Pearson Correlation of ATAC-seq samples" -o {output.pearson} --outFileCorMatrix Deeptools/PearsonCor_bigwigScores.tab
@@ -109,6 +116,7 @@ rule alignmentSieve:
     conda: "envs/bowtie2.yaml"
     log: "logs/{sample}.alignmentSieve.log"
     threads: 16
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     shell: """
             alignmentSieve -p {threads} -b {input.sortBam} -o {output.bam} -l {params.smp} --ATACshift --ignoreDuplicates --minMappingQuality 5 --minFragmentLength 20
             samtools sort -@{threads} {output.bam} -o {output.sort}
@@ -133,6 +141,8 @@ rule bamPEFragmentSize:
     params: bamFiles = bamPEFragmentSizeInput()[0], labels = bamPEFragmentSizeInput()[1]
     conda: "envs/deeptools.yaml"
     log: "logs/bamPEFragmentSize.log"
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
+    threads: 8
     shell: """bamPEFragmentSize -T "Fragment size of ATAC-seq data" --maxFragmentLength 1000 -b {params.bamFiles} --samplesLabel {params.labels} --outRawFragmentLengths Deeptools/outRawFragmentLengths.txt --table Deeptools/table.txt"""
 
 rule modPeak:
@@ -146,6 +156,7 @@ rule featureCounts:
     conda: "envs/featureCounts.yaml"
     log: "logs/{sample}.featureCounts.log"
     threads: 8
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     shell:"featureCounts -p -T {threads} -a {input.saf} -F SAF -o {output.fc} {input.bam} 2> {output.err}"
 
 rule fripScore:
@@ -168,5 +179,6 @@ rule ChIPseeker:
     params: ref = config['reference']
     conda: "envs/R.yaml"
     log: "logs/ChIPseeker.log"
+    resources: mem_mb=config['medium']['mem'], time=config['medium']['time'], partition=config['medium']['partition']
     script: "scripts/ChIPseeker.R"
 

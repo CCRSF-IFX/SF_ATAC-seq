@@ -23,5 +23,5 @@ os.chdir(analysisdir)
 print (os.getcwd())
 print (rawdir)
 print (samples)
-print ('ini')
-# Allow users to fix the underlying OS via singularity.
+partition=config['medium']['partition']
+print (partition)
