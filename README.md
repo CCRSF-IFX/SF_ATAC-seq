@@ -31,7 +31,7 @@ Peak Calling: [Genrich](https://github.com/jsh58/Genrich) identifies regions of 
 
 ## Usage
 
-## Step 1: Obtain a Copy of the Workflow
+### Step 1: Obtain a Copy of the Workflow
 
 Clone the Repository: Clone the new repository to your local machine, choosing the directory where you want to perform data analysis. Instructions for cloning can be found [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
