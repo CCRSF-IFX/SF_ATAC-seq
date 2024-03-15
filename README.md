@@ -29,7 +29,7 @@ Peak Calling: [Genrich](https://github.com/jsh58/Genrich) identifies regions of 
 
 [MultiQC](https://multiqc.info/) : generates an interactive HTML report that provides a concise summary of the results
 
-# Usage
+## Usage
 
 ## Step 1: Obtain a Copy of the Workflow
 
