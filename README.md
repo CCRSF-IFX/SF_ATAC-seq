@@ -69,10 +69,4 @@ Local Execution: Execute the workflow on your local machine using $N cores:
 
 Here, $N represents the number of cores you wish to allocate for the workflow.
 
-### Cluster Execution: For cluster environments, submit the workflow as follows:
-
-`snakemake --use-conda --cluster slurm --jobs 100`
-
-Replace 100 with the number of jobs you intend to submit simultaneously. Ensure your cluster environment is correctly configured to handle Snakemake jobs.
-
 
